@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Fries",
+        "category": "appetizers",
+        "price": 3.50
+    },
+    {
+        "name": "Country fries",
+        "category": "appetizers",
+        "price": 5
+    },
+    {
+        "name": "Pepsi",
+        "category": "drinks",
+        "price": 1.3
+    },
+    {
+        "name": "White wine",
+        "category": "drinks",
+        "price": 4
+    },
+    {
+        "name": "Gyros",
+        "category": "main_dishes",
+        "price": 9
+    },
+    {
+        "name": "Pizza",
+        "category": "main_dishes",
+        "price": 12
+    }
+]

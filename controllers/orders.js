@@ -3,30 +3,54 @@ var router = express.Router();
 const models = require('../models')
 var validator = require('../validators').orders;
 const c = require('chalk');
-
+const app_vars = require('../config').app_variables;
+const {handleItems} = require('../helpers/handleItems');
 
 // Module routes
 const routes = {
-    getOrder: '/getOrder$',
+    getActiveOrders: '/getActiveOrders$',
     createOrder: '/createOrder$',
     updateOrderStatus: '/updateOrderStatus$'
 }
 
-router.route(routes.getOrder)
+router.route(routes.getActiveOrders)
 .get(async(req, res) => {
 
-    res.status(200).send();
+    let orders = await models.Order.find({isActive: true}).sort({"createdAt": 1}).catch(err=>console.log('err',err));
+    
+    if (!orders?.length) {
+        console.log(c.yellowBright('[getActiveOrders] > WARNING | No active orders were found'));
+        res.status(200).send();
+        return;
+    }
+
+    console.log(c.greenBright(`[getActiveOrders] > SUCCESS | Active orders were fetched successfully`));
+    res.status(200).send(orders);
 });
+
 
 router.route(routes.createOrder)
 .post(async(req, res) => {
 
-    let currecny = req.body?.currecny ? req.body?.currecny : 'Euro';
-    let items = req.body?.items ? req.body?.items : false;
+
+    let currecny = req.body?.currecny ? req.body?.currecny : app_vars.default_currency;
+    let items = req.body?.items ? req.body?.items : false;      
 
 
     if (!validator.createOrder(items)) {
-        console.log(c.redBright('[createOrder] > FAILED | Missing required parameters'));
+        console.log(c.redBright('[createOrder] > FAILED | Validation failure'));
+        res.status(400).send('Something went wrong');
+        return;
+    }
+
+
+    handler = await handleItems(items);
+    console.log('handler',handler);
+    items = handler?.newItems;
+    let totalPrice = handler?.totalPrice;
+
+    if (!items) {
+        console.log(c.redBright('[createOrder] > FAILED | Error on items handler'));
         res.status(400).send('Something went wrong');
         return;
     }
@@ -34,6 +58,7 @@ router.route(routes.createOrder)
     
     let order = await models.Order.create({
         items: items,
+        totalPrice: totalPrice,
         currecny: currecny,
         isActive: true
     }).catch(err=>console.log('err',err))
@@ -49,9 +74,31 @@ router.route(routes.createOrder)
     res.status(200).send();
 });
 
+
 router.route(routes.updateOrderStatus)
 .post(async(req, res) => {
 
+    let id = req.body?._id ? req.body._id : false;
+    let status = req.body?.status ? req.body.status : false;
+
+
+    if (!validator.updateOrderStatus(id, status)) {
+        console.log(c.redBright('[updateOrderStatus] > FAILED | Validation failure'));
+        res.status(400).send('Something went wrong');
+        return;
+    }
+
+
+    let order = await models.Order.findOneAndUpdate({_id: id}, {isActive: status}, {returnOriginal: false}).catch(err=>console.log('err',err));
+    
+    if (!order) {
+        console.log(c.redBright('[updateOrderStatus] > FAILED | Failed to update the order'));
+        res.status(400).send('Something went wrong');
+        return;
+    }
+
+
+    console.log(c.greenBright(`[updateOrderStatus] > SUCCESS | Status for order ${order._id} was successfully updated`));
     res.status(200).send();
 });
 

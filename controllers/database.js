@@ -13,8 +13,10 @@ router.route(routes.buildDatabase)
 .post(async(req, res) => {
 
     await models.Order.deleteMany({}).catch(err=>console.log('err',err));
+    await models.Item.deleteMany({}).catch(err=>console.log('err',err));
 
-    await models.Order.insertMany(content.orders).catch(err=>console.log('err'));
+    await models.Order.insertMany(content.orders).catch(err=>console.log('err',err));
+    await models.Item.insertMany(content.items).catch(err=>console.log('err',err));
 
     res.status(200).send();
 });
