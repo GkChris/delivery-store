@@ -1,7 +1,7 @@
-const {users_register} = require('./users/register');
+const orders = require('./orders');
 
 module.exports = {
-    users: {
-        register: users_register
+    orders: {
+        createOrder: orders.createOrder
     }
 }

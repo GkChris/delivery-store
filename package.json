@@ -4,7 +4,8 @@
   "description": "A simple backend for a delivery store",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "NODE_ENV=development nodemon app.js --trace-warnings"
   },
   "repository": {
     "type": "git",
@@ -17,9 +18,11 @@
   },
   "homepage": "https://github.com/GkChris/delivery-store#readme",
   "dependencies": {
+    "chalk": "^4.1.2",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "mongoose": "^6.8.0"
+    "mongoose": "^6.8.0",
+    "nodemon": "^2.0.20"
   }
 }
