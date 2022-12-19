@@ -56,7 +56,12 @@ function handleItems(items, currency){
 
             price = dbItem.price;
             if (currency != app_vars.default_currency) price = await api.convertCurrency(currency, price);
-            
+
+            if (!price) {
+                resolve(false);
+                return;
+            }
+
 
             newItem = {
                 name: dbItem.name,
