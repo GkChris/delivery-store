@@ -33,7 +33,7 @@ router.route(routes.createOrder)
 .post(async(req, res) => {
 
 
-    let currecny = req.body?.currecny ? req.body?.currecny : app_vars.default_currency;
+    let currency = req.body?.currency ? req.body?.currency : app_vars.default_currency;
     let items = req.body?.items ? req.body?.items : false;      
 
 
@@ -43,9 +43,8 @@ router.route(routes.createOrder)
         return;
     }
 
- 
-    handler = await handleItems(items, currecny);
-    if (currecny != app_vars.default_currency) 
+    console.log(currency);
+    handler = await handleItems(items, currency);
     
     items = handler.newItems;
     let totalPrice = handler.totalPrice;
@@ -60,7 +59,7 @@ router.route(routes.createOrder)
     let order = await models.Order.create({
         items: items,
         totalPrice: totalPrice,
-        currecny: currecny,
+        currency: currency,
         isActive: true
     }).catch(err=>console.log('err',err))
     
