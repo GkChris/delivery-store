@@ -43,7 +43,6 @@ router.route(routes.createOrder)
         return;
     }
 
-    console.log(currency);
     handler = await handleItems(items, currency);
     
     items = handler.newItems;
