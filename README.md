@@ -13,7 +13,7 @@ An explaiantion of the key elements for the backend structure
 Controllers contains the logic for the backend's endpoints. ``controllers/index.js`` contains the routes for the REST API.
 
 ### Helpers
-Helpers contains one file, the ``helpers/index.js``. The file export the ``handleItems`` function that is responsible both for converting the item data for creating a order to the actual form that is set on the model's mongoose schema as well as handling the price convertion based on the input's currency (if given) 
+Helpers contains one file, the ``helpers/index.js``. The file export the ``handleItems`` function that is responsible both for converting the item's data for creating a order to the actual form that is set on the model's mongoose schema as well as handling the price convertion based on the input's currency (if given) 
 
 ### Models
 Models contains all the collection schemas that are used in the mongo database
@@ -27,12 +27,12 @@ Validatiors are responsible for securing that the body data during a POST reques
 # API Endpoints
 The server contains two endpoints, ``/database``, ``/items`` and ``orders``
 
-# ``/database``
+## ``/database``
 
 ### ``/database/buildDatabase`` (POST)
 Used to drop and re-create the items and orders collections in the mongo database. What it does is it takes into account the content from the json files, located in the ``content`` folder and turn them into a collection.
 
-# ``/items``
+## ``/items``
 
 ### ``/items/getItem`` (GET)
 Used to fetch a record from the item collection in the mongo database. It matches the record by the given id query parameter
@@ -74,7 +74,7 @@ Used to delete an item record from the item collection in the mongo database.
 ### Parameters
 **_id**: ``String``
 
-# ``/orders``
+## ``/orders``
 
 ### ``/orders/getActiveOrders`` (GET)
 Used to fetch all order records from the order collection in the mongo database. It matches all records that has the isActive field set to true 
