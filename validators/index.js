@@ -3,8 +3,7 @@ const items = require('./items');
 
 module.exports = {
     orders: {
-        createOrder: orders.createOrder,
-        updateOrderStatus: orders.updateOrderStatus
+        createOrder: orders.createOrder
     },
     items: {
         createItem: items.createItem,
