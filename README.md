@@ -13,7 +13,7 @@ An explaiantion of the key elements for the backend structure
 Controllers contains the logic for the backend's endpoints. ``controllers/index.js`` contains the routes for the REST API.
 
 ### Helpers
-Helpers contains one file, the ``helpers/index.js``. The file export the ``handleItems`` function that is responsible both for converting the item's data for creating a order to the actual form that is set on the model's mongoose schema as well as handling the price convertion based on the input's currency (if given) 
+Helpers contains one file, the ``helpers/index.js``. The file export the ``handleItems`` function that is responsible both for converting the item's data for creating a order (``orders/createOrder`` endpoint) to the actual form that is set on the model's mongoose schema as well as handling the price convertion based on the input's currency (if given) 
 
 ### Models
 Models contains all the collection schemas that are used in the mongo database
