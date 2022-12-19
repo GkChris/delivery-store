@@ -7,8 +7,9 @@ function createOrder(items){
     items.map((item) => {
 
         if (
-            !item.id || item.id?.length > vals.max_length ||
-            !item.quantity || item.quantity.toString().length > vals.max_length
+            !item.id || 
+            !item.hasOwnProperty('id') || item.id?.length > vals.max_length ||
+            !item.hasOwnProperty('quantity') || !item.quantity || item.quantity.toString().length > vals.max_length
         ) {
             return false;
         }
