@@ -45,9 +45,9 @@ router.route(routes.createOrder)
 
 
     handler = await handleItems(items);
-    console.log('handler',handler);
-    items = handler?.newItems;
-    let totalPrice = handler?.totalPrice;
+    
+    items = handler.newItems;
+    let totalPrice = handler.totalPrice;
 
     if (!items) {
         console.log(c.redBright('[createOrder] > FAILED | Error on items handler'));
@@ -82,8 +82,8 @@ router.route(routes.updateOrderStatus)
     let status = req.body?.status ? req.body.status : false;
 
 
-    if (!validator.updateOrderStatus(id, status)) {
-        console.log(c.redBright('[updateOrderStatus] > FAILED | Validation failure'));
+    if (!id) {
+        console.log(c.redBright('[updateOrderStatus] > FAILED |  Missing order id'));
         res.status(400).send('Something went wrong');
         return;
     }

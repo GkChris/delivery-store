@@ -45,12 +45,12 @@ function handleItems(items){
 
         for await (let item of items){
 
-            dbItem = await models.Item.findOne({_id: item._id}).catch(err=>{
-                console.log('err',err)
+            dbItem = await models.Item.findOne({_id: item._id}).catch(err=>console.log('err',err));
+            if (!dbItem) {
                 resolve(false);
                 return;
-            });
-            
+            }
+
             newItem = {
                 name: dbItem.name,
                 quantity: item.quantity,

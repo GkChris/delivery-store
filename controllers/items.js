@@ -111,12 +111,13 @@ router.route(routes.updateItem)
         return;
     }
 
+
+    let record = {};
+    if (name) record.name = name;
+    if (category) record.category = category;
+    if (price) record.price = price;
     
-    let item = await models.Item.findOneAndUpdate({_id: id}, {
-        name: name,
-        category: category,
-        price: price
-    }, {returnOriginal: false}).catch(err=>console.log('err',err));
+    let item = await models.Item.findOneAndUpdate({_id: id}, record, {returnOriginal: false}).catch(err=>console.log('err',err));
 
     if (!item) {
         console.log(c.redBright('[updateItem] > FAILED | Failed to create item'));
