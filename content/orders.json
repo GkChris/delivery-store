@@ -18,7 +18,7 @@
             }
         ],
         "totalPrice": 24.1,
-        "currency": "Euro",
+        "currency": "EUR",
         "isActive": true
     },
     {
@@ -40,7 +40,7 @@
             }
         ],
         "totalPrice": 29,
-        "currency": "Euro",
+        "currency": "EUR",
         "isActive": false
     }
 ]

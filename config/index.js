@@ -18,7 +18,7 @@ module.exports = {
 
   app_variables: {
 
-    default_currency: process.env.DEFAULT_CURRENCY || 'Euro'
+    default_currency: process.env.DEFAULT_CURRENCY || 'EUR'
 
   }
 

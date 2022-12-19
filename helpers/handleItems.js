@@ -34,13 +34,16 @@
 */
 
 const models = require('../models');
+const app_vars = require('../config').app_variables;
+const api = require('../services').api;
 
-function handleItems(items){
+function handleItems(items, currency){
     return new Promise(async(resolve, reject) => {
 
         var dbItem;
         var newItem;
         var newItems = [];
+        var price = 0;
         var totalPrice = 0;
 
         for await (let item of items){
@@ -51,14 +54,18 @@ function handleItems(items){
                 return;
             }
 
+            price = dbItem.price;
+            if (currency != app_vars.default_currency) price = await api.convertCurrency(currency, price);
+            
+
             newItem = {
                 name: dbItem.name,
                 quantity: item.quantity,
-                price: item.quantity * dbItem.price
+                price: item.quantity * price
             }
             
             newItems.push(newItem);
-            totalPrice += item.quantity * dbItem.price;
+            totalPrice += item.quantity * price;
         }
 
         

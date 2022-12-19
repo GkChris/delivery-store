@@ -43,8 +43,9 @@ router.route(routes.createOrder)
         return;
     }
 
-
-    handler = await handleItems(items);
+ 
+    handler = await handleItems(items, currecny);
+    if (currecny != app_vars.default_currency) 
     
     items = handler.newItems;
     let totalPrice = handler.totalPrice;
