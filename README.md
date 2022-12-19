@@ -116,7 +116,7 @@ Used to update the isActive field of a record in the order collection in the mon
 **status**: ``String`` (Optional)
 >If **status** is not given, the default status will be set to false.
 
-# Installation & Executing
+# Installation & Execution
 
 ### Backend
 
