@@ -6,22 +6,22 @@ A demo backend server that handles orders for an online delivery store.
 
 An explaiantion of the key elements for the backend structure
 
-# Config 
+### Config 
 ``config/index.js`` file exports key values to be used globaly within the server. 
 
-# Controllers
+### Controllers
 Controllers contains the logic for the backend's endpoints. ``controllers/index.js`` contains the routes for the REST API.
 
-# Helpers
+### Helpers
 Helpers contains one file, the ``helpers/index.js``. The file export the ``handleItems`` function that is responsible both for converting the item data for creating a order to the actual form that is set on the model's mongoose schema as well as handling the price convertion based on the input's currency (if given) 
 
-# Models
+### Models
 Models contains all the collection schemas that are used in the mongo database
 
-# Services
+### Services
 Service contains the ``convertCurrency`` function. The function is called when a currency different to the one that is set as default is given on the ``orders/createOrder`` endpoint and is responsible for retreiving a valid price for the given currency. Uses the fixer api for currency convertion.
 
-# Validators
+### Validators
 Validatiors are responsible for securing that the body data during a POST request are valid. Validators includes checks for the required parameters as well as securing that the parameter's length is withing a legitimate limit. 
 
 # API Endpoints
