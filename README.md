@@ -93,7 +93,6 @@ Used to create an order record to the order collection in the mongo database.
 
 ```JSON
 {
-{
     "currency": "GBP",
     "items": [
         {
@@ -105,7 +104,6 @@ Used to create an order record to the order collection in the mongo database.
             "quantity": 2
         },
     ]
-}
 }
 ```
 
